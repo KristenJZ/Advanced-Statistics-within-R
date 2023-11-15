@@ -65,8 +65,21 @@ anova(model.simple, model.multiple)
 
 # model.multiple is significantly different and has a larger r^2
 
+####------------------------------------------------####
+### Part V: Moderator and mediation effects ###
+#Moderator Effect
+model.int <- lm(math~read+age+read:age, data = eclsk)
+summary(model.int)
+plot(model.int)
+
+#Mediator Effect
+model.mediator <- lm(read~age, data =eclsk)
+model.outcome <- lm(math~read+age, data=eclsk)
+library(stargazer)
+stargazer(model.mediator, model.outcome, type = "text", title = "Mediation Effects")
+
 ####--------------------------------------------------------------------####
-### Part V: Check Assumptions
+### Part VI: Check Assumptions
 # Recall the key assumptions with regression involve the residuals (error, leftovers from prediction)
 
 ###Independence and homogeneity of variance (homoscedasticity)
